@@ -27,7 +27,11 @@ module.exports = (app, config) => {
     app.use((req, res, next) => {
         if(req.user){
             res.locals.user = req.user;
-        }
+            req.user.isInRole('Admin').then(isAdmin => {
+                res.locals.isAdmin = isAdmin;
+                next();
+            })
+        }else
 
         next();
     });
