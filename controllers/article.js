@@ -25,10 +25,40 @@ module.exports = {
         let articleArgs = req.body;
 
         let errorMsg = '';
-        if (!articleArgs.title){
-            errorMsg = 'Invalid title!';
-        } else if (!articleArgs.content){
+        if (!articleArgs.profession){
+            errorMsg = 'Invalid profession!';
+        } else if (!articleArgs.age){
+            errorMsg = 'Invalid age!';
+        }
+        else if (!articleArgs.name){
+            errorMsg = 'Invalid name!';
+        }
+        else if (!articleArgs.city){
+            errorMsg = 'Invalid city!';
+        }
+        else if (!articleArgs.work) {
+            errorMsg = 'Invalid working experience!';
+        }
+        else if (!articleArgs.specialization) {
+            errorMsg = 'Invalid specialization!';
+        }
+        else if (!articleArgs.education) {
+            errorMsg = 'Invalid education!';
+        }
+        else if (!articleArgs.content) {
             errorMsg = 'Invalid content!';
+        }
+        else if (!articleArgs.certifications) {
+            errorMsg = 'Invalid certfications!';
+        }
+        else if (!articleArgs.workplace) {
+            errorMsg = 'Invalid working place!';
+        }
+        else if (!articleArgs.adress) {
+            errorMsg = 'Invalid adress!';
+        }
+        else if (!articleArgs.telephone) {
+            errorMsg = 'Invalid telephone number!';
         }
 
         if (errorMsg) {
