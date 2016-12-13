@@ -184,34 +184,18 @@ module.exports = {
             return;
         }
 
-        req.user.isInRole('Admin').then(isAdmin => {
-            if (isAdmin) {
-                Article.findOneAndRemove({_id: id}).populate('author').then(article => {
-                    let author = article.author;
+        Article.findById(id).then(article => {
+            req.user.isInRole('Admin').then(isAdmin => {
+                if (!isAdmin && !req.user.isAuthor(article)) {
+                    res.redirect('/');
+                    return;
+                }
 
-                    // Index of the article's ID in the author's articles.
-                    let index = author.articles.indexOf(article.id);
+                Article.findOneAndRemove({_id: id}).then(article => {
 
-                    if(index < 0) {
-                        let errorMsg = 'Article was not found for that author!';
-                        res.render('article/delete', {error: errorMsg})
-                    } else {
-                        // Remove count elements after given index (inclusive).
-                        let count = 1;
-                        author.articles.splice(index, count);
-                        author.save().then((user) => {
-                            res.redirect('/');
-                        });
-                    }
+                    res.redirect('/');
                 });
-            }
-            else {
-                res.redirect('/');
-            }
-
-
+            });
         });
-
-
     }
 };
