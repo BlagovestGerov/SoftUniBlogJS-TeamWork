@@ -54,8 +54,8 @@ module.exports = {
         else if (!articleArgs.workplace) {
             errorMsg = 'Invalid working place!';
         }
-        else if (!articleArgs.adress) {
-            errorMsg = 'Invalid adress!';
+        else if (!articleArgs.address) {
+            errorMsg = 'Invalid address!';
         }
         else if (!articleArgs.telephone) {
             errorMsg = 'Invalid telephone number!';
@@ -133,16 +133,46 @@ module.exports = {
         let articleArgs = req.body;
 
         let errorMsg = '';
-        if (!articleArgs.title){
-            errorMsg = 'Article title cannot be empty!';
-        } else if (!articleArgs.content) {
-            errorMsg = 'Article content cannot be empty!'
+        if (!articleArgs.name){
+            errorMsg = 'Name cannot be empty!';
+        } else if (!articleArgs.profession) {
+            errorMsg = 'Profession cannot be empty!'
+        }
+        else if (!articleArgs.age) {
+            errorMsg = 'Age cannot be empty!'
+        }
+        else if (!articleArgs.city) {
+            errorMsg = 'City cannot be empty!'
+        }
+        else if (!articleArgs.education) {
+            errorMsg = 'University Degree cannot be empty!'
+        }
+        else if (!articleArgs.specialization) {
+            errorMsg = 'Specialization cannot be empty!'
+        }
+        else if (!articleArgs.certifications) {
+            errorMsg = 'Certifications cannot be empty!'
+        }
+        else if (!articleArgs.workplace) {
+            errorMsg = 'Current working place cannot be empty!'
+        }
+        else if (!articleArgs.work) {
+            errorMsg = 'Working experience cannot be empty!'
+        }
+        else if (!articleArgs.content) {
+            errorMsg = 'About me cannot be empty!'
+        }
+        else if (!articleArgs.address) {
+            errorMsg = 'Address cannot be empty!'
+        }
+        else if (!articleArgs.telephone) {
+            errorMsg = 'Telephone number cannot be empty!'
         }
 
         if(errorMsg) {
             res.render('article/edit', {error: errorMsg})
         } else {
-            Article.update({_id: id}, {$set: {title: articleArgs.title, content: articleArgs.content}})
+            Article.update({_id: id}, {$set: {name: articleArgs.name, profession: articleArgs.profession, age: articleArgs.age, city: articleArgs.city, education: articleArgs.education, specialization: articleArgs.specialization, certifications: articleArgs.certifications, workplace: articleArgs.workplace, work: articleArgs.work, content: articleArgs.content, address: articleArgs.address, telephone: articleArgs.telephone}})
                 .then(updateStatus => {
                     res.redirect(`/article/details/${id}`);
                 })

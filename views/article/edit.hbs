@@ -2,28 +2,90 @@
     <div class="well">
         <form class="form-horizontal" method="POST" action="/article/edit/{{id}}">
             <fieldset>
-                <legend>Edit Post</legend>
+                <legend><b>Profile Editor</b></legend>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" for="articleTitle">Post Title</label>
+                    <label class="col-sm-4 control-label" for="profileName">Name</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="articleTitle" placeholder="Post Title" value="{{title}}" name="title" required >
+                        <input type="text" class="form-control" id="profileName" placeholder="Name" value="{{name}}" name="name" required >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" for="articleContent">Content</label>
-                    <div class="col-sm-6">
-                        <textarea class="form-control" id="articleContent" rows="5" name="content" required>{{content}}</textarea>
+                    <label class="col-sm-4 control-label" for="profileProfession">Profession</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="profileProfession" placeholder="Profession" value="{{profession}}" name="profession" required >
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileAge">Age</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="profileAge" placeholder="Age" value="{{age}}" name="age" required >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileCity">City</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="profileCity" placeholder="City" value="{{city}}" name="city" required >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileEducation">University Degree</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="profileEducation" placeholder="Education" value="{{education}}" name="education" required >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileSpecialization">Specialization</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="profileSpecialization" placeholder="Specialization" value="{{specialization}}" name="specialization" required >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileCertifications">Certifications</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="profileCertifications" rows="5" name="certifications" required>{{certifications}}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileWorkplace">Current Working Place</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="profileWorkplace" placeholder="Working place" value="{{workplace}}" name="workplace" required >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileWork">Working Experience</label>
+                    <div class="col-sm-6 ">
+                        <textarea class="form-control" id="profileWork" rows="5" name="work" required>{{work}}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileContent">About me</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="profileContent" rows="5" name="content" required>{{content}}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileaddress">Address</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="profileaddress" placeholder="address" value="{{address}}" name="address" required >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileTelephone">Telephone Number</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="profileTelephone" placeholder="Telephone Number" value="{{telephone}}" name="telephone" required >
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
+
                         <a href="/" class="btn btn-default">Cancel</a>
 
                         <button type="submit" href="/article/edit/{{id}}" class="btn btn-success">Edit</button>
                     </div>
                 </div>
+
+
             </fieldset>
         </form>
     </div>
