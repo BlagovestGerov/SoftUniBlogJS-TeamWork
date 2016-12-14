@@ -1,0 +1,30 @@
+<div class="container body-content">
+    <div class="well">
+        <h2>All Profession -
+            <a href="/admin/profession/create" class="btn btn-warning">Create New</a>
+        </h2>
+        <div class="row">
+            <table class="table table-striped table-hover ">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each professions}}
+                    <tr>
+                        <td>{{ this.id }}</td>
+                        <td>{{ this.name }}</td>
+                        <td>
+                            <a href="/admin/profession/edit/{{this.id}}">Edit</a>
+                            <a href="/admin/profession/delete/{{this.id}}">Delete</a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

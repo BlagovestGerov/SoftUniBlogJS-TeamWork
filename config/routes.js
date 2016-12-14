@@ -41,5 +41,9 @@ module.exports = (app) => {
 
     app.get('/admin/user/all', adminController.user.all);
 
+    app.get('/admin/profession/all', adminController.profession.all);
+
+    app.get('/admin/profession/create', adminController.profession.createGet);//-
+    app.post('/admin/profession/create', adminController.profession.createPost);//-
 };
 
