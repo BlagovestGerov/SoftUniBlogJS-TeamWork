@@ -3,8 +3,9 @@
         {{#each professions}}
             <div class="col-md-6">
                 <header>
-                    <h2>
-                        <a href="/profession/{{ this.id }}"> {{ this.name }} ({{ this.articles.length }}) </a>
+                    <h2> <a href="/profession/{{this.id}}">
+                        {{this.name}}({{this.articles.length}})
+                    </a>
                     </h2>
                 </header>
             </div>

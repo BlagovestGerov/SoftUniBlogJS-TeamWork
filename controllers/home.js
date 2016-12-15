@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Article = mongoose.model('Article');
+const User = mongoose.model('User');
 const Profession = mongoose.model('Profession');
 
 module.exports = {
@@ -8,7 +9,6 @@ module.exports = {
             res.render('home/index',{professions: professions});
         })
     },
-
 
     listProfessionArticles:(req, res)=>{
         let id=req.params.id;
