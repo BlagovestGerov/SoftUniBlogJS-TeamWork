@@ -14,7 +14,6 @@ let articleSchema = mongoose.Schema({
     address: {type: String, required: true},
     telephone: {type: Number, required: true},
     author: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
-    //profession:{type:mongoose.Schema.Types.ObjectId,required:true,ref:'Profession'},//-
     date: {type: Date, default: Date.now()}
 });
 

@@ -1,0 +1,33 @@
+
+.user-box{
+    border:2px solid rgb(107,142,35);
+    border-radius: 15px;
+    margin-left:20px;
+}
+.user-article{
+    overflow:auto;
+}
+#image{
+    float:left;
+}
+#a-details {
+    text-decoration: none;
+    background-color: unset;
+}
+#user-info{
+    float:left;
+    position: relative;
+}
+#user-number{
+    text-decoration:none;
+    background-color:unset;
+    position:absolute;
+    bottom:10px;
+    right:30px;
+}
+#user-number:hover {
+    color: rgb(96,155,65);
+}
+.author:hover{
+    color: rgb(96,155,65);
+}

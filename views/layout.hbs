@@ -3,6 +3,7 @@
 <head>
     <title>Medical Info</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/customStyle.css' />
     <link rel="icon" href="/images/images.png">
     <script src="/javascripts/jquery-1.10.2.js"></script>
     <script src="/javascripts/bootstrap.js"></script>
@@ -30,12 +31,11 @@
                                             class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="/admin/user/all">Users</a></li>
-                                        <li><a href="/admin/profession/all">Professions</a></li>
+                                        <li><a href="/admin/category/all">Categories</a></li>
                                     </ul>
                                 </li>
                             {{/if}}
-                            <li><a href="/user/details">Welcome({{user.email}})</a></li>
-                            <li><a href="/article/create">New profile</a></li>
+                            <li><a href="/article/details/{{{user.ObjectId}}}">Welcome {{user.fullName}}</a></li>
                             <li><a href="/user/logout">Logout</a></li>
                         </ul>
                     </div>
