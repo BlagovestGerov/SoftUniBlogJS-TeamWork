@@ -1,4 +1,5 @@
 const Article = require('mongoose').model('Article');
+const Profession = require('mongoose').model('Profession');
 
 module.exports = {
     createGet: (req, res) => {
@@ -10,7 +11,9 @@ module.exports = {
             return;
         }
 
-        res.render('article/create');
+        Profession.find({}).then(professions=> {
+            res.render('article/create', {professions: professions});
+        });
     },
 
     createPost: (req, res) => {

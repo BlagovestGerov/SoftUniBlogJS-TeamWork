@@ -2283,7 +2283,7 @@ pre code {
   }
 }
 table {
-  background-color: olivedrab;
+  background-color: #dcfac4;
 }
 caption {
   padding-top: 8px;
@@ -3589,7 +3589,7 @@ tbody.collapse.in {
   clear: both;
   font-weight: normal;
   line-height: 1.42857143;
-  color: #7b8a8b;
+  color: #82ea48;
   white-space: nowrap;
 }
 .dropdown-menu > li > a:hover,
