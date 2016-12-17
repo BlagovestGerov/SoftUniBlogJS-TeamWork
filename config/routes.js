@@ -49,5 +49,8 @@ module.exports = (app) => {
 
     app.get('/admin/profession/edit/:id', adminController.profession.editGet);//----
     app.post('/admin/profession/edit/:id', adminController.profession.editPost);//----
+
+    app.get('/admin/profession/delete/:id', adminController.profession.deleteGet);//----
+    app.post('/admin/profession/delete/:id', adminController.profession.deletePost);//----
 };
 

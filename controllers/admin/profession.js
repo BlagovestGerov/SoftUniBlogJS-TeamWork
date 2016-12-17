@@ -50,6 +50,22 @@ module.exports={
                 res.redirect('/admin/profession/all');
             })
         }
+    },
+    deleteGet: (req, res) => {
+        let id = req.params.id;
+
+        Profession.findById(id).then(profession => {
+            res.render('admin/profession/delete', {profession: profession});
+        });
+    },
+
+    deletePost: (req, res) => {
+        let id = req.params.id;
+
+        Profession.findOneAndRemove({_id: id}).then(profession => {
+            profession.prepareDelete();
+            res.redirect('/admin/profession/all');
+        });
     }
 };
 

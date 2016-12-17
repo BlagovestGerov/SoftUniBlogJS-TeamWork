@@ -81,20 +81,7 @@ module.exports = {
                 article.prepareInsert();
             });
         })
-        //------------------
-        Article.create(articleArgs).then(article => {
-            req.profession.articles.push(article.id);
-            req.profession.save(err => {
-                if (err){
-                    res.redirect('/', {error : err.message});
-                }else {
-                    res.redirect('/');
-                }
-                article.prepareInsert();
-            });
-        })
 
-        //---------------------
     },
 
     details: (req, res) => {
