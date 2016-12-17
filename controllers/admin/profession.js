@@ -25,5 +25,31 @@ module.exports={
             })
         }
     },
+
+    editGet:(req,res)=>{
+        let id=req.params.id;
+
+        Profession.findById(id).then(profession=>{
+            res.render('admin/profession/edit',{profession:profession});
+        });
+    },
+
+    editPost:(req,res)=>{
+        let id=req.params.id;
+
+        let editArgs=req.body;
+
+        if(!editArgs.name){
+            let errorMessage='Profession name cannot be null';
+
+            Profession.findById(id).then(profession=>{
+                res.render('admin/profession/edit',{profession:profession,error:errorMessage});
+            });
+        }else{
+            Profession.findOneAndUpdate({_id:id},{name:editArgs.name}).then(profession=>{
+                res.redirect('/admin/profession/all');
+            })
+        }
+    }
 };
 

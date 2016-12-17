@@ -28,9 +28,9 @@ module.exports = {
         let articleArgs = req.body;
 
         let errorMsg = '';
-        if (!articleArgs.profession){
+        /*if (!articleArgs.profession){
             errorMsg = 'Invalid profession!';
-        } else if (!articleArgs.age){
+        } else */if (!articleArgs.age){
             errorMsg = 'Invalid age!';
         }
         else if (!articleArgs.name){
@@ -78,8 +78,23 @@ module.exports = {
                 }else {
                     res.redirect('/');
                 }
+                article.prepareInsert();
             });
         })
+        //------------------
+        Article.create(articleArgs).then(article => {
+            req.profession.articles.push(article.id);
+            req.profession.save(err => {
+                if (err){
+                    res.redirect('/', {error : err.message});
+                }else {
+                    res.redirect('/');
+                }
+                article.prepareInsert();
+            });
+        })
+
+        //---------------------
     },
 
     details: (req, res) => {
@@ -113,11 +128,16 @@ module.exports = {
         Article.findById(id).then(article => {
             req.user.isInRole('Admin').then(isAdmin => {
                 if (!isAdmin && !req.user.isAuthor(article)) {
+
                     res.redirect('/');
                     return;
                 }
 
-                res.render('article/edit', article)
+                Profession.find({}).then(professions=> {
+                    article.professions = professions;
+
+                    res.render('article/edit', article)
+                });
             });
         });
     },
@@ -175,10 +195,35 @@ module.exports = {
         if(errorMsg) {
             res.render('article/edit', {error: errorMsg})
         } else {
-            Article.update({_id: id}, {$set: {name: articleArgs.name, profession: articleArgs.profession, age: articleArgs.age, city: articleArgs.city, education: articleArgs.education, specialization: articleArgs.specialization, certifications: articleArgs.certifications, workplace: articleArgs.workplace, work: articleArgs.work, content: articleArgs.content, address: articleArgs.address, telephone: articleArgs.telephone}})
+           /*Article.update({_id: id},
+                {$set: {name: articleArgs.name, profession: articleArgs.profession, age: articleArgs.age, city: articleArgs.city, education: articleArgs.education, specialization: articleArgs.specialization, certifications: articleArgs.certifications, workplace: articleArgs.workplace, work: articleArgs.work, content: articleArgs.content, address: articleArgs.address, telephone: articleArgs.telephone}})
                 .then(updateStatus => {
                     res.redirect(`/article/details/${id}`);
+                })*/
+          Article.findById(id).populate('profession').then(article=>{
+            if(article.profession.id!==articleArgs.profession){
+               article.profession.articles.remove(article.id);
+               article.profession.save();
+            }
+
+            article.profession=articleArgs.profession;
+            article.title=articleArgs.title;
+            article.content=articleArgs.content;
+
+            article.save((err)=>{
+                if(err){
+                    console.log(err.message);
+                }
+                Profession.findById(article.profession).then(profession=>{
+                    if(profession.articles.indexOf(article.id)===-1){
+                        profession.articles.push(article.id);
+                        profession.save();
+                    }
+
+                    res.redirect(`/article/details/${id}`);
                 })
+            });
+          });
         }
     },
 
