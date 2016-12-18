@@ -41,6 +41,32 @@ userSchema.method ({
             let isInRole = this.roles.indexOf(role.id) !== -1;
             return isInRole;
         })
+    },
+
+    prepareDelete: function () {
+        for (let role of this.roles){
+            Role.findById(role).then(role => {
+                role.users.remove(this.id);
+                role.save();
+            })
+        }
+
+        let Article = mongoose.model('Article');
+        for (let article of this.articles){
+            Article.findById(article).then(article => {
+                article.prepareDelete();
+                article.remove();
+            })
+        }
+    },
+
+    prepareInsert: function () {
+        for (let role of this.roles){
+            Role.findById(role).then(role => {
+                role.users.push(this.id);
+                role.save();
+            });
+        }
     }
 });
 
@@ -59,7 +85,25 @@ module.exports.seedAdmin = () => {
                 let passwordHash = encryption.hashPassword('admin', salt);
 
                 let roles = [];
-                roles.push(role.id);
+                Role.findOne({name: 'User'}).then(role => {
+                    roles.push(role.id);
+
+                   // edit if it doesn't work
+                    userObject.roles = roles;
+                    User.create(userObject).then(user => {
+                        user.prepareInsert();
+                        req.logIn(user, (err) => {
+                            if (err) {
+                                registerArgs.error = err.message;
+                                res.render('user/register', registerArgs);
+                                return;
+                            }
+
+                            res.redirect('/');
+                        })
+                    })
+                });
+
 
                 let user = {
                     email: email,

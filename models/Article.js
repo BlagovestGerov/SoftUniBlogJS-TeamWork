@@ -18,7 +18,7 @@ let articleSchema = mongoose.Schema({
     date: {type: Date, default: Date.now()}
 });
 
-//->
+
 articleSchema.method({
     prepareInsert: function () {
         let User = mongoose.model('User');
@@ -54,7 +54,7 @@ articleSchema.method({
         });
     },
 });
-//<-
+
 
 const Article = mongoose.model('Article', articleSchema);
 
