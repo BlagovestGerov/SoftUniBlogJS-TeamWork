@@ -20,8 +20,8 @@ module.exports = (app) => {
 
     app.get('/article/details/:id', articleController.details);
 
-    app.get('/article/details/', articleController.details);
-    app.post('/article/details/', articleController.details);
+    app.get('/article/login', articleController.details);
+    app.post('/article/login', articleController.details);
 
 
     app.get('/article/edit/:id', articleController.editGet);
