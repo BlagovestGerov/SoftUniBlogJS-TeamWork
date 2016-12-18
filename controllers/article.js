@@ -137,8 +137,6 @@ module.exports = {
         let errorMsg = '';
         if (!articleArgs.name){
             errorMsg = 'Name cannot be empty!';
-        } else if (!articleArgs.profession) {
-            errorMsg = 'Profession cannot be empty!'
         }
         else if (!articleArgs.age) {
             errorMsg = 'Age cannot be empty!'
@@ -174,11 +172,7 @@ module.exports = {
         if(errorMsg) {
             res.render('article/edit', {error: errorMsg})
         } else {
-           /*Article.update({_id: id},
-                {$set: {name: articleArgs.name, profession: articleArgs.profession, age: articleArgs.age, city: articleArgs.city, education: articleArgs.education, specialization: articleArgs.specialization, certifications: articleArgs.certifications, workplace: articleArgs.workplace, work: articleArgs.work, content: articleArgs.content, address: articleArgs.address, telephone: articleArgs.telephone}})
-                .then(updateStatus => {
-                    res.redirect(`/article/details/${id}`);
-                })*/
+
           Article.findById(id).populate('profession').then(article=>{
             if(article.profession.id!==articleArgs.profession){
                article.profession.articles.remove(article.id);
@@ -186,8 +180,18 @@ module.exports = {
             }
 
             article.profession=articleArgs.profession;
-            article.title=articleArgs.title;
-            article.content=articleArgs.content;
+            article.name=articleArgs.name;
+            article.age=articleArgs.age;
+              article.city = articleArgs.city;
+              article.education=articleArgs.education;
+              article.specialization=articleArgs.specialization;
+              article.certifications = articleArgs.certifications;
+              article.workplace = articleArgs.workplace;
+              article.work = articleArgs.work;
+              article.content = articleArgs.content;
+              article.address = articleArgs.address;
+              article.telephone = articleArgs.telephone;
+
 
             article.save((err)=>{
                 if(err){
