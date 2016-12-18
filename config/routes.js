@@ -42,15 +42,18 @@ module.exports = (app) => {
 
     app.get('/admin/user/all', adminController.user.all);
 
-    app.get('/admin/profession/all', adminController.profession.all);//-
+    app.get('/admin/user/edit/:id', adminController.user.editGet);
+    app.post('/admin/user/edit/:id', adminController.user.editPost);
 
-    app.get('/admin/profession/create', adminController.profession.createGet);//-
-    app.post('/admin/profession/create', adminController.profession.createPost);//-
+    app.get('/admin/profession/all', adminController.profession.all);
 
-    app.get('/admin/profession/edit/:id', adminController.profession.editGet);//----
-    app.post('/admin/profession/edit/:id', adminController.profession.editPost);//----
+    app.get('/admin/profession/create', adminController.profession.createGet);
+    app.post('/admin/profession/create', adminController.profession.createPost);
 
-    app.get('/admin/profession/delete/:id', adminController.profession.deleteGet);//----
-    app.post('/admin/profession/delete/:id', adminController.profession.deletePost);//----
+    app.get('/admin/profession/edit/:id', adminController.profession.editGet);
+    app.post('/admin/profession/edit/:id', adminController.profession.editPost);
+
+    app.get('/admin/profession/delete/:id', adminController.profession.deleteGet);
+    app.post('/admin/profession/delete/:id', adminController.profession.deletePost);
 };
 
