@@ -22,7 +22,7 @@ module.exports = (app) => {
 
     app.get('/article/details/', articleController.details);
     app.post('/article/details/', articleController.details);
-    
+
 
     app.get('/article/edit/:id', articleController.editGet);
     app.post('/article/edit/:id', articleController.editPost);
