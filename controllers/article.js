@@ -64,6 +64,10 @@ module.exports = {
             errorMsg = 'Invalid telephone number!';
         }
 
+        else if (!articleArgs.photo) {
+            errorMsg = 'Invalid profile photo URL!';
+        }
+
         if (errorMsg) {
             res.render('article/create', {error: errorMsg});
             return;

@@ -4,7 +4,7 @@ let articleSchema = mongoose.Schema({
     name: {type: String, required: true},
     //profession: {type: String, required: true},
     profession: {type: mongoose.Schema.Types.ObjectId,required: true, ref:'Profession'},//-
-    age: {type: Number, required: true},
+    age: {type: String, required: true},
     city: {type: String, required: true},
     education: {type: String, required: true},
     specialization: {type: String, required: true},
@@ -13,7 +13,8 @@ let articleSchema = mongoose.Schema({
     work: {type: String, required: true},
     content: {type: String, required: true},
     address: {type: String, required: true},
-    telephone: {type: Number, required: true},
+    telephone: {type: String, required: true},
+    photo: {type: String, required: true},
     author: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
     date: {type: Date, default: Date.now()}
 });
