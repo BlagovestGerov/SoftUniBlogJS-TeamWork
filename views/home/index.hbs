@@ -1,15 +1,15 @@
-<div class="container body-content">
-    <div class="row">
+<div class="container body-content body">
+    <div class="row parallax">
         {{#each professions}}
-            <div class="col-md-6">
-                <header>
-                    <img class="img" src="/images/d-man-sitting-thinking-red-question-marks-box-over-white-background-32812068.jpg";>
-                    <h2> <a href="/profession/{{this.id}}">
-                        {{this.name}}({{this.articles.length}})
-                    </a>
-                    </h2>
-                </header>
-            </div>
+            <a href="/profession/{{this.id}}" id="profession-link">
+                <div class="col-md-4" id="profession-container" onmouseover="this.style.background='#ECF0F1';this.style.opacity='0.5'"  onmouseout="this.style.background='#6B8E23';this.style.opacity='1'">
+                    <header>
+                        <h2 id="profession-heading">
+                            <p>{{this.name}}</p>
+                        </h2>
+                    </header>
+                </div>
+            </a>
         {{/each}}
     </div>
 </div>
