@@ -172,6 +172,9 @@ module.exports = {
         else if (!articleArgs.telephone) {
             errorMsg = 'Telephone number cannot be empty!'
         }
+        else if (!articleArgs.photo) {
+            errorMsg = 'Profile photo URL cannot be empty!'
+        }
 
         if(errorMsg) {
             res.render('article/edit', {error: errorMsg})
@@ -195,6 +198,7 @@ module.exports = {
               article.content = articleArgs.content;
               article.address = articleArgs.address;
               article.telephone = articleArgs.telephone;
+              article.photo = articleArgs.photo;
 
 
             article.save((err)=>{

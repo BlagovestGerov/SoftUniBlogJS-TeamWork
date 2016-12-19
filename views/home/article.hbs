@@ -5,18 +5,15 @@
                 <article class="user-article">
                     <div id="image">
                         <a href="/article/details/{{this.id}}" id="a-details">
-                       <img class="img" src="/images/d-man-sitting-thinking-red-question-marks-box-over-white-background-32812068.jpg";>
+
                         <div class="author">
                             <h3>{{this.author.fullName}}</h3>
                         </div>
                         </a>
                     </div>
-                    <div id="user-info">
-                        <h2>{{this.profession}}</h2>
-                        <p>City: {{this.city}}</p>
-                        <p>WorkPlace: {{this.workplace}}</p>
-                    </div>
+                    
                         <a id="user-number" href="tel:{{this.telephone}}">Phone: {{this.telephone}}</a>
+
                 </article>
             </div>
         {{/each}}
