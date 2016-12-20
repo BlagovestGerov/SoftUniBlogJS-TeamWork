@@ -51,8 +51,7 @@
                 {{#each comments}}
                     <div class="media-body">
                         <div class="well well-lg">
-                            <h4 class="media-heading text-uppercase reviews">{{this.author.name}}</h4>
-                            <h5 class="media-heading text-uppercase reviews">{{this.author.email}}</h5>
+                            <h class="media-heading text-uppercase reviews">{{this.author.fullName}}</h>
                             <p class="media-comment">
                                 {{this.content}}
                             </p>

@@ -95,3 +95,5 @@ articleSchema.method({
 const Article = mongoose.model('Article', articleSchema);
 
 module.exports = Article;
+
+// след като сме създали модела трябва да го добавим в datebase.js
