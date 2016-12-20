@@ -18,6 +18,13 @@ module.exports = {
                 errorMsg = 'Passwords do not match!'
             }
 
+            let regexPattern =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g;
+
+            let isMatching = registerArgs.email.match(regexPattern);
+            if(!isMatching) {
+                errorMsg = "Invalid email!";
+            }
+
             if (errorMsg) {
                 registerArgs.error = errorMsg;
                 res.render('user/register', registerArgs)
