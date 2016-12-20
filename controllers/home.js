@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Article = mongoose.model('Article');
 const User = mongoose.model('User');
 const Profession = mongoose.model('Profession');
+const Tag = mongoose.model('Tag');
 
 module.exports = {
     index: (req, res) => {
@@ -18,6 +19,12 @@ module.exports = {
                 if(err){
                     console.log(err.message);
                 }
+
+                Tag.populate(profession.articles, {path: 'tags'}, (err) =>{
+                    if(err){
+                        console.log(err.message);
+                    }
+                });
 
                 res.render('home/article',{articles:profession.articles})
             });

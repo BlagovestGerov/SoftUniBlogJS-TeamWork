@@ -26,8 +26,17 @@
                         <input type="text" class="form-control" id="profileAge" placeholder="Age" value="{{age}}" name="age" disabled >
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" for="profileCity">City</label>
+                    <label class="col-sm-4 control-label" for="article_tags">Residence City</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="article_tags"
+                               name="tags" value="{{ tagNames }}" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="profileCity">Place of Birth</label>
                     <div class="col-sm-4 ">
                         <input type="text" class="form-control" id="profileCity" placeholder="City" value="{{city}}" name="city" disabled >
                     </div>

@@ -2,10 +2,13 @@ const userController = require('./../controllers/user');
 const articleController = require('./../controllers/article');
 const homeController = require('./../controllers/home');
 const adminController = require('./../controllers/admin/admin');
+const tagController = require('./../controllers/tag');
 
 module.exports = (app) => {
     app.get('/', homeController.index);
     app.get('/profession/:id',homeController.listProfessionArticles);
+
+    app.get('/tag/:name', tagController.listArticlesByTag);
 
     app.get('/user/register', userController.registerGet);
     app.post('/user/register', userController.registerPost);

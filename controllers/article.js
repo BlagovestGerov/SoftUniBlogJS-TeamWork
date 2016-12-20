@@ -1,5 +1,6 @@
 const Article = require('mongoose').model('Article');
 const Profession = require('mongoose').model('Profession');
+const initializeTags = require('./../models/Tag').initializeTags;
 
 module.exports = {
     createGet: (req, res) => {
@@ -74,7 +75,12 @@ module.exports = {
         }
 
         articleArgs.author = req.user.id;
+        articleArgs.tags = [];
         Article.create(articleArgs).then(article => {
+            // Get the tags from the input, split it by space or semicolon,
+            // then remove empty entries.
+            let tagNames = articleArgs.tagNames.split(/\s+|,/).filter(tag => {return tag});
+            initializeTags(tagNames, article.id);
                 article.prepareInsert();
             res.redirect('/');
             });
@@ -83,7 +89,7 @@ module.exports = {
     details: (req, res) => {
         let id = req.params.id;
 
-        Article.findById(id).populate('author').then(article => {
+        Article.findById(id).populate('author tags').then(article => {
             if (!req.user){
                 res.render('article/details', { article: article, isUserAuthorized: false});
                 return;
@@ -108,7 +114,7 @@ module.exports = {
             return;
         }
 
-        Article.findById(id).then(article => {
+        Article.findById(id).populate('tags').then(article => {
             req.user.isInRole('Admin').then(isAdmin => {
                 if (!isAdmin && !req.user.isAuthor(article)) {
 
@@ -119,6 +125,7 @@ module.exports = {
                 Profession.find({}).then(professions=> {
                     article.professions = professions;
 
+                    article.tagNames = article.tags.map(tag => {return tag.name});
                     res.render('article/edit', article)
                 });
             });
@@ -180,7 +187,7 @@ module.exports = {
             res.render('article/edit', {error: errorMsg})
         } else {
 
-          Article.findById(id).populate('profession').then(article=>{
+          Article.findById(id).populate('profession tags').then(article=>{
             if(article.profession.id!==articleArgs.profession){
                article.profession.articles.remove(article.id);
                article.profession.save();
@@ -200,7 +207,21 @@ module.exports = {
               article.telephone = articleArgs.telephone;
               article.photo = articleArgs.photo;
 
+              let newTagNames = articleArgs.tags.split(/\s+|,/).filter(tag => {return tag});
 
+              // Get me the old article's tags which are not
+              // re-entered.
+              let oldTags = article.tags
+                  .filter(tag => {
+                      return newTagNames.indexOf(tag.name) === -1;
+                  });
+
+              for(let tag of oldTags){
+                  tag.deleteArticle(article.id);
+                  article.deleteTag(tag.id);
+              }
+
+              initializeTags(newTagNames, article.id);
             article.save((err)=>{
                 if(err){
                     console.log(err.message);
@@ -229,13 +250,14 @@ module.exports = {
             return;
         }
 
-        Article.findById(id).then(article => {
+        Article.findById(id).populate('category tags').then(article => {
             req.user.isInRole('Admin').then(isAdmin => {
                 if (!isAdmin && !req.user.isAuthor(article)) {
                     res.redirect('/');
                     return;
                 }
 
+                article.tagNames = article.tags.map(tag => {return tag.name});
                 res.render('article/delete', article)
             });
         });

@@ -12,7 +12,12 @@
                         </a>
                     </div>
 
-                        <a id="user-number" href="tel:{{this.telephone}}">Phone: {{this.telephone}}</a>
+                    <p>
+                        {{#each this.tags }}
+                         Residence City: <a class="text-center"
+                               href="/tag/{{this.name}}">{{ this.name }}</a>
+                        {{/each}}
+                    </p>
 
                 </article>
             </div>

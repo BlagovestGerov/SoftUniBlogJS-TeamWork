@@ -13,7 +13,8 @@
                 </p>
                     <p><b>Age:</b> {{article.age}}
                 </p>
-                <p><b>City:</b> {{article.city}}
+
+                <p><b>Place of Birth:</b>  {{article.city}}
                 </p>
                 <p><b>University Degree:</b> {{article.education}}
                 </p>
@@ -27,14 +28,13 @@
                 </p>
                 <p><b>About me:</b> {{article.content}}
                 </p>
-                <p><b>Address:</b> {{article.address}}
-                </p>
                 <p><b>Telephone Number:</b> {{article.telephone}}
                 </p>
 
                 </div>
 
                 <footer>
+
                     <div class="pull-right">
                         {{#if isUserAuthorized}}
                             <a class="btn btn-sm btn-success" href="/article/edit/{{article.id}}">Edit &raquo;</a>

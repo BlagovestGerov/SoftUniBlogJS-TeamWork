@@ -15,6 +15,7 @@ let articleSchema = mongoose.Schema({
     address: {type: String, required: true},
     telephone: {type: String, required: true},
     photo: {type: String, required: true},
+    tags: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Tag'}],
     author: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
     date: {type: Date, default: Date.now()}
 });
@@ -35,6 +36,16 @@ articleSchema.method({
                 profession.save();
             }
         });
+
+        let Tag = mongoose.model('Tag');
+        for (let tagId of this.tags){
+            Tag.findById(tagId).then(tag => {
+                if (tag) {
+                    tag.articles.push(this.id);
+                    tag.save();
+                }
+            });
+        }
     },
 
     prepareDelete: function () {
@@ -53,7 +64,23 @@ articleSchema.method({
                 profession.save();
             }
         });
+
+        let Tag = mongoose.model('Tag');
+        for (let tagId of this.tags){
+            Tag.findById(tagId).then(tag => {
+                if (tag) {
+                    tag.articles.remove(this.id);
+                    tag.save();
+                }
+            });
+        }
     },
+
+    deleteTag: function (tagId){
+        this.tags.remove(tagId);
+        this.save();
+    }
+
 });
 
 
