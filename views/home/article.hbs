@@ -1,26 +1,22 @@
-<div class="container body-content">
-    <div class="row">
+<div class="container body-content body">
+    <div class="row " id="parallax-content">
         {{#each articles}}
-            <div class="col-md-4 col-sm-4 user-box">
-                <article class="user-article">
-                    <div id="image">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail" id="content-article"onmouseover="this.style.opacity='0.5';this.style.background='#6B8E23';this.style.color='black'" onmouseout="this.style.opacity='1';this.style.background='#ECF0F1';this.style.color='#6B8E23'">
+                        <div id="image-box-article">
                         <a href="/article/details/{{this.id}}" id="a-details">
-
-                        <div class="author">
-                            <h3>{{this.author.fullName}}</h3>
-                        </div>
+                        <img src="{{this.photo}}" alt="..." id="article-img">
                         </a>
+                        </div>
+                        <div class="caption" style="color:inherit">
+                            <h3>{{this.author.fullName}}</h3>
+                {{#each this.tags }}
+                            <a href="/tag/{{this.name}}" class="btn btn-primary" role="button">{{ this.name }}</a>
+                {{/each}}
+                            <a href="tel:{{this.telephone}}" class="btn btn-default" role="button">{{this.telephone}}</a>
+                        </div>
                     </div>
-
-                    <p>
-                        {{#each this.tags }}
-                         Residence City: <a class="text-center"
-                               href="/tag/{{this.name}}">{{ this.name }}</a>
-                        {{/each}}
-                    </p>
-
-                </article>
-            </div>
+                </div>
         {{/each}}
     </div>
 </div>
