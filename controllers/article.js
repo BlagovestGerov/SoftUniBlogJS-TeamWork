@@ -80,7 +80,7 @@ module.exports = {
         Article.create(articleArgs).then(article => {
             // Get the tags from the input, split it by space or semicolon,
             // then remove empty entries.
-            let tagNames = articleArgs.tagNames.split(/\s+|,/).filter(tag => {return tag});
+            let tagNames = articleArgs.tagNames.split(/,/).filter(tag => {return tag});
             initializeTags(tagNames, article.id);
                 article.prepareInsert();
             res.redirect('/');
@@ -242,7 +242,7 @@ module.exports = {
               article.telephone = articleArgs.telephone;
               article.photo = articleArgs.photo;
 
-              let newTagNames = articleArgs.tags.split(/\s+|,/).filter(tag => {return tag});
+              let newTagNames = articleArgs.tags.split(/,/).filter(tag => {return tag});
 
               // Get me the old article's tags which are not
               // re-entered.
