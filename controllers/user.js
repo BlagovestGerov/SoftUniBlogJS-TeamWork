@@ -25,6 +25,13 @@ module.exports = {
                 errorMsg = "Invalid email!";
             }
 
+            let regexPassword = /^[a-zA-Z0-9]+$/g;
+
+            let isMatchingPassword = registerArgs.password.match(regexPassword);
+            if(!isMatchingPassword) {
+                errorMsg = "Invalid password!"
+            }
+
             if (errorMsg) {
                 registerArgs.error = errorMsg;
                 res.render('user/register', registerArgs)
