@@ -22,6 +22,7 @@ module.exports = (app) => {
     app.post('/article/create', articleController.createPost);
 
     app.get('/article/details/:id', articleController.details);
+    app.post('/article/details/:id', articleController.commentPost);
 
     app.get('/article/edit/:id', articleController.editGet);
     app.post('/article/edit/:id', articleController.editPost);
@@ -29,6 +30,9 @@ module.exports = (app) => {
     app.get('/article/delete/:id', articleController.deleteGet);
     app.post('/article/delete/:id', articleController.deletePost);
 
+
+    // След този код всичко останало ще е видимо само за потребители, които са админи!
+    // това е възможно след промените в app.use v express.js
     app.use((req, res, next) => {
         if (req.isAuthenticated()) {
             req.user.isInRole('Admin').then(isAdmin => {

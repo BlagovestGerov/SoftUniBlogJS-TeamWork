@@ -15,6 +15,7 @@ let articleSchema = mongoose.Schema({
     address: {type: String, required: true},
     telephone: {type: String, required: true},
     photo: {type: String, required: true},
+    comments: [{ type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Comment' }],
     tags: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Tag'}],
     author: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
     date: {type: Date, default: Date.now()}
@@ -64,6 +65,13 @@ articleSchema.method({
                 profession.save();
             }
         });
+
+        let Comment = mongoose.model('Comment');
+        for (let comment of this.comments)
+            Comment.findById(comment).then(comment => {
+                comment.prepareDelete();
+                comment.remove(this.id);
+    });
 
         let Tag = mongoose.model('Tag');
         for (let tagId of this.tags){

@@ -44,6 +44,52 @@
                     </div>
                 </footer>
             </article>
+
+            <!-- BEGIN #comments -->
+
+            <div class="body-content">
+                {{#each comments}}
+                    <div class="media-body">
+                        <div class="well well-lg">
+                            <h4 class="media-heading text-uppercase reviews">{{this.author.name}}</h4>
+                            <h5 class="media-heading text-uppercase reviews">{{this.author.email}}</h5>
+                            <p class="media-comment">
+                                {{this.content}}
+                            </p>
+                        </div>
+
+                    </div>
+                {{/each}}
+                <hr>
+
+
+                <!--end-->
+                {{#if user}}
+                    <div align="center">
+                        <form class="form-horizontal" method="POST" action="/article/details/{{article.id}}">
+                            <div class="form-group">
+                                <label>Добави коментар</label> <br>
+                                <input type="text" class="form-control" placeholder="{{user.email}}" value="E-mail: {{user.email}}" name="title" disabled >
+
+                                <input type="text" class="form-control"  placeholder="{{user.fullName}}" value="Име: {{user.fullName}}" name="title" disabled >
+
+                                <textarea class="form-control" cols="100" rows="10" id="comment" placeholder="Текст на коментара" name="content" ></textarea>
+                            </div>
+                            <div class="form-group">
+
+                                <button type="reset" class="btn btn-danger">Cancel</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+
+                            </div>
+                        </form>
+                    </div>
+                {{/if}}
+            </div>
+
+        </div>
+    </div>
+
+</div>
         </div>
     </div>
 </div>

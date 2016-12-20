@@ -8,6 +8,7 @@ let userSchema = mongoose.Schema(
         passwordHash: {type: String, required: true},
         fullName: {type: String, required: true},
         articles: [{type: mongoose.Schema.Types.ObjectId, ref:'Article'}],
+        comments:[{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
         roles: [{type: mongoose.Schema.Types.ObjectId, ref:'Role'}],
         salt: {type: String, required: true},
     }
@@ -58,6 +59,15 @@ userSchema.method ({
                 article.remove();
             })
         }
+
+        let Comment = mongoose.model('Comment');
+        for (let comment of this.comments)
+            Comment.findById(comment).then(comment => {
+                comment.prepareDelete();
+                comment.remove(this.id);
+
+            })
+
     },
 
     prepareInsert: function () {

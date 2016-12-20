@@ -1,5 +1,6 @@
 const Article = require('mongoose').model('Article');
 const Profession = require('mongoose').model('Profession');
+const Comment = require('mongoose').model('Comment');
 const initializeTags = require('./../models/Tag').initializeTags;
 
 module.exports = {
@@ -86,21 +87,55 @@ module.exports = {
             });
     },
 
+
+
     details: (req, res) => {
+        // след натискане на бутона Read more ни се зареда адрес с ID на дадената статия, за да подскжем
+        // на сървара какво точно трябва да ни върне използваме params функцията и променливата id приема
+        // ид на статията
         let id = req.params.id;
-
-        Article.findById(id).populate('author tags').then(article => {
-            if (!req.user){
-                res.render('article/details', { article: article, isUserAuthorized: false});
-                return;
-            }
-
-            req.user.isInRole('Admin').then(isAdmin => {
-                let isUserAuthorized = isAdmin || req.user.isAuthor(article);
-
-                res.render('article/details', { article: article, isUserAuthorized: isUserAuthorized});
+        // след като знаем id на статията  я намираме и визоализираме
+        Article.findById(id).populate('author tags').populate('comments').then(article => {
+            Comment.find({}).populate('author').then(comments => {
+                let d = [];
+                for (let comment of comments) {
+                    if (comment.article == id) {
+                        d.push(comment);
+                    }
+                }
+                // Правим проверка дали потребитея е админ или автор на статията, ако е едно от двете ще му визоализираме
+                // бутончетата edin и delete във вюто.  в първия случай потребителя е неразпознат задаваме му стойностт
+                // isUserAuthorized: false че не съществува.
+                // Във втория случай правим проверка дали е админ или автор, ако е едно от двете му се присвоява стойнста и
+                // isUserAuthorized става true. във вюто излиза ифнормацията като я въвеждаме {{#if isUserAuthorized}}
+                if(!req.user) {
+                    res.render('article/details', {article: article, isUserAuthorized: false, comments:d});
+                    return;
+                } else {
+                    req.user.isInRole('Admin').then(isAdmin => {
+                        let isUserAuthorized = isAdmin || req.user.isAuthor(article);
+                        res.render('article/details', {article: article, isUserAuthorized: isUserAuthorized, comments:d});
+                        return;
+                    });
+                }
             });
-        });
+        })
+
+    },
+
+    commentPost: (req, res)=> {
+        let id = req.params.id;
+        let commentBody = req.body;
+
+        commentBody.article = id;
+        commentBody.like=0;
+        commentBody.author = req.user.id;
+        Comment.create(commentBody).then(comment => {
+            comment.prepareInsert();
+            res.redirect(`${id}`);
+        })
+
+
     },
 
     editGet: (req, res) => {
