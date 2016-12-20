@@ -21,26 +21,32 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
+                {{#if isAdmin}}
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                   role="button" aria-expanded="false">Admin<span
+                                        class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/admin/user/all">Users</a></li>
+                                    <li><a href="/admin/profession/all">Profession</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/">Welcome {{user.fullName}}</a></li>
+                            <li><a href="/user/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                {{else}}
                 {{#if user}}
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            {{#if isAdmin}}
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                       role="button" aria-expanded="false">Admin<span
-                                            class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="/admin/user/all">Users</a></li>
-                                        <li><a href="/admin/profession/all">Profession</a></li>
-                                    </ul>
-                                </li>
-                            {{/if}}
-
                             <li><a href="/article/details/{{{user.ObjectId}}}">Welcome {{user.fullName}}</a></li>
                             <li><a href="/article/create">New profile</a></li>
                             <li><a href="/user/logout">Logout</a></li>
                         </ul>
                     </div>
+                {{/if}}
                 {{/if}}
                 {{#unless user}}
                     <div class="navbar-collapse collapse">
