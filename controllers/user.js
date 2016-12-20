@@ -19,8 +19,8 @@ module.exports = {
             }
 
             let regexPattern =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g;
-
             let isMatching = registerArgs.email.match(regexPattern);
+            
             if(!isMatching) {
                 errorMsg = "Invalid email!";
             }
@@ -30,6 +30,13 @@ module.exports = {
             let isMatchingPassword = registerArgs.password.match(regexPassword);
             if(!isMatchingPassword) {
                 errorMsg = "Invalid password!"
+            }
+
+            let regexfullName = /^[a-zA-Z ]{2,30}$/g;
+            let isMatchingfullName = registerArgs.fullName.match(regexfullName);
+
+            if(!isMatchingfullName) {
+                errorMsg = "Invalid fullName!"
             }
 
             if (errorMsg) {
