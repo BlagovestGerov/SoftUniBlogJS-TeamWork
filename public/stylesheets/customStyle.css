@@ -26,6 +26,21 @@
     background-repeat: no-repeat;
     background-size: 100%;
 }
+.parallax-edit-create{
+    background-image: url('../images/apple.jpg');
+    width: 100%;
+    height: 50%;
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.parallax-edit-create label{
+    color:white;
+}
+.parallax-edit-create legend{
+    color:white;
+}
 
 #profession-container{
 
