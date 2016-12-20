@@ -1,0 +1,18 @@
+<div class="container body-content">
+    <h2>Professionals from - {{ tag.name }}</h2>
+    <img src = "/images/map-main-campus-05.21.15-1200px.jpg" alt="not working" class="img">
+    <div class="row">
+        {{#each articles}}
+            <div class="col-md-6">
+                <article>
+                    <header>
+                        <h2>{{ this.name }}</h2>
+                    </header>
+                    <p>
+                        {{ this.address }}
+                    </p>
+                </article>
+            </div>
+        {{/ each}}
+    </div>
+</div>
